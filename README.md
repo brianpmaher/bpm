@@ -1,6 +1,6 @@
 # BPM
 
-BPM is a personal library for building cross-platform applications.
+This is a personal library for building cross-platform applications.
 
 ## Index
 
@@ -12,8 +12,9 @@ BPM is a personal library for building cross-platform applications.
 ## Scripts
 
 - Windows
-  - `scripts\windows\setup_msvc_env.bat` - Sets up the MSVC environment for building on Windows.
-  - `scripts\windows\build_windows_debug.bat` - Builds the project for Windows in debug mode.
+  - `scripts\windows\setup_msvc_env.bat` - Sets up the MSVC compiler environment.
+  - `scripts\windows\build_windows_debug.bat` - Builds the library for Windows in debug mode.
+  - `scripts\windows\clean.bat` - Cleans the build artifacts.
 
 ## Platforms
 
