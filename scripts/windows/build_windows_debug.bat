@@ -11,7 +11,7 @@ if not exist build\windows\debug (
     mkdir build\windows\debug
 )
 
-echo !log_info! Building application... !log_end!
+echo !log_info! Building application in debug mode... !log_end!
 pushd build\windows\debug
 call cl ..\..\..\src\main.c /Fe:app.exe /std:c11 /options:strict /nologo /Wall /WX /Od /Zi
 if !errorlevel! neq 0 (
