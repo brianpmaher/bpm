@@ -11,7 +11,7 @@
             "cwd": "${workspaceFolder}/examples/assert",
             "environment": [],
             "console": "integratedTerminal",
-            "preLaunchTask": "build assert example"
-        }
+            "preLaunchTask": "build assert example",
+        },
     ]
 }
