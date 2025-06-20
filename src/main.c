@@ -1,4 +1,5 @@
-#include "core.h"
+#include "base.h"
+#include "simd.h"
 
 #include <stdio.h>
 
