@@ -7,7 +7,7 @@ cd /D "%~dp0"..\..\
 call scripts\windows\_log.bat
 
 if not exist build (
-    echo !log_info! Building directory does not exist, creating it... !log_end!
+    echo !log_info! Build directory does not exist, creating it... !log_end!
     mkdir build
 )
 
