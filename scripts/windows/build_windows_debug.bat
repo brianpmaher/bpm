@@ -1,7 +1,7 @@
 @echo off
 
 ::
-:: Build application for Windows in debug mode
+:: Build bpm.dll for Windows in debug mode
 ::
 
 setlocal EnableDelayedExpansion
@@ -20,16 +20,16 @@ if not exist build\windows\debug (
     mkdir build\windows\debug
 )
 
-echo !log_info! Building application in debug mode... !log_end!
+echo !log_info! Building bpm in debug mode... !log_end!
 pushd build\windows\debug
-call cl ..\..\..\src\main.c /Iinclude /Fe:app.exe /std:c11 /options:strict /nologo /Wall /WX /Od /Zi
+call cl ..\..\..\src\*.c /I ..\..\..\include /D DLL_EXPORT /LD /Fe:bpm.dll /std:c11 /options:strict /nologo /Wall /WX /Od /Zi
 if !errorlevel! neq 0 (
-    echo !log_error! Failed to build application. !log_end!
+    echo !log_error! Failed to build bpm. !log_end!
     popd
     goto exit_error
 )
 popd
-echo !log_success! Application built successfully. !log_end!
+echo !log_success! bpm built successfully. !log_end!
 
 :exit_success
 endlocal
