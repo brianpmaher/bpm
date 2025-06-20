@@ -6,14 +6,14 @@ cd /D "%~dp0"..\..\
 
 call scripts\windows\_log.bat
 
-if not exist build (
-    echo !log_info! Build directory does not exist, creating it... !log_end!
-    mkdir build
+if not exist build\windows\debug (
+    echo !log_info! Creating build directory... !log_end!
+    mkdir build\windows\debug
 )
 
 echo !log_info! Building application... !log_end!
-pushd build
-call cl ..\src\main.c /options:strict /nologo /Fe:app.exe /Wall /WX
+pushd build\windows\debug
+call cl ..\..\..\src\main.c /Fe:app.exe /std:c11 /options:strict /nologo /Wall /WX /Od /Zi
 if !errorlevel! neq 0 (
     echo !log_error! Failed to build application !log_end!
     popd
