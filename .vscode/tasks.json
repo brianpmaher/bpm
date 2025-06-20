@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build bpm dll",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/windows/build_windows_debug.bat",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build assert example",
+            "type": "shell",
+            "command": "${workspaceFolder}/examples/assert/build_windows.bat",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "dependsOn": "build bpm dll"
+        }
+    ]
+}
