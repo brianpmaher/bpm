@@ -15,7 +15,8 @@
 ## Build System
 
 - Windows
-  - [ ] Windows x64 debug
+  - [ ] Time builds
+  - [x] Windows x64 debug
   - [ ] Windows x64 release
   - [ ] Windows x64 hot reload
   - [ ] WebAssembly debug
@@ -40,6 +41,7 @@
 - [x] SIMD
 - [ ] Runtime
 - [ ] Test
+  - [ ] Add script to run tests
 - [ ] Memory
 - [ ] String
 - [ ] Array
@@ -60,3 +62,13 @@
 - [ ] Physics
 - [ ] AI
 - [ ] Scripting
+
+## Examples
+
+- [ ] Assert
+- [ ] Logging
+- [ ] Hot reload
+- [ ] Hello Window
+- [ ] Hello Triangle
+- [ ] Hello Input
+- [ ] Hello Audio
