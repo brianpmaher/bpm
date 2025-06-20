@@ -1,8 +1,8 @@
+@echo off
+
 ::
 :: Setup MSVC environment
 ::
-
-@echo off
 
 call "%~dp0_goto_project_root.bat"
 

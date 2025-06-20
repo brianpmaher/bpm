@@ -1,8 +1,8 @@
+@echo off
+
 ::
 :: Build application for Windows in debug mode
 ::
-
-@echo off
 
 setlocal EnableDelayedExpansion
 
@@ -22,7 +22,7 @@ if not exist build\windows\debug (
 
 echo !log_info! Building application in debug mode... !log_end!
 pushd build\windows\debug
-call cl ..\..\..\src\main.c /Fe:app.exe /std:c11 /options:strict /nologo /Wall /WX /Od /Zi
+call cl ..\..\..\src\main.c /Iinclude /Fe:app.exe /std:c11 /options:strict /nologo /Wall /WX /Od /Zi
 if !errorlevel! neq 0 (
     echo !log_error! Failed to build application. !log_end!
     popd

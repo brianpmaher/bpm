@@ -1,8 +1,8 @@
+@echo off
+
 ::
 :: Internal: Setup logger
 ::
-
-@echo off
 
 if defined _logger_initialized (
 	goto :exit_success
