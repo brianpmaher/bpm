@@ -1,4 +1,12 @@
+::
+:: Internal: Setup logger
+::
+
 @echo off
+
+if defined _logger_initialized (
+	goto :exit_success
+)
 
 for /F %%a in ('echo prompt $E ^| cmd') do (
 	set "esc=%%a"
@@ -17,3 +25,10 @@ set "log_warn=%yellow%[WARNING]"
 set "log_error=%red%[ERROR]"
 set "log_success=%green%[SUCCESS]"
 set "log_end=%reset%"
+
+set _logger_initialized=1
+
+echo %log_info% Logger initialized %log_end%
+
+:exit_success
+exit /b 0
