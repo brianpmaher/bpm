@@ -1,6 +1,6 @@
 # BPM
 
-BPM is a library for building cross-platform applications.
+BPM is a personal library for building cross-platform applications.
 
 ## Index
 
