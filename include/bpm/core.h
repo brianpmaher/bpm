@@ -137,8 +137,10 @@
 // Assertions
 //
 
+#include <stdlib.h> // exit
+
 #if COMPILER_MSVC
-    #include <intrin.h>
+    #include <intrin.h> // __debugbreak
     #define debug_break() __debugbreak()
 #elif COMPILER_GCC || COMPILER_CLANG || COMPILER_EMSCRIPTEN
     #define debug_break() __builtin_trap()
@@ -146,20 +148,22 @@
     #error "Unknown compiler"
 #endif
 
-API void _assert_fail(const char* expression, const char* message, const char* file, int line);
+API void _assert_handler(const char* expression, const char* message, const char* file, int line);
 #define _get_assert_macro(_1, _2, NAME, ...) NAME
 #define _assert1(expression) \
     do { \
         if (!(expression)) { \
-            _assert_fail(#expression, "Assertion failed", __FILE__, __LINE__); \
+            _assert_handler(#expression, "Assertion failed", __FILE__, __LINE__); \
             debug_break(); \
+            exit(EXIT_FAILURE); \
         } \
     } while (0)
 #define _assert2(expression, message) \
     do { \
         if (!(expression)) { \
-            _assert_fail(#expression, message, __FILE__, __LINE__); \
+            _assert_handler(#expression, message, __FILE__, __LINE__); \
             debug_break(); \
+            exit(EXIT_FAILURE); \
         } \
     } while (0)
 #define assert(...) _get_assert_macro(__VA_ARGS__, _assert2, _assert1)(__VA_ARGS__)
@@ -229,27 +233,27 @@ API void _assert_fail(const char* expression, const char* message, const char* f
 #endif
 
 #if SIMD_USE_SSE
-    #include <xmmintrin.h>
+    #include <xmmintrin.h> // SSE intrinsics
 #endif
 #if SIMD_USE_SSE2
-    #include <emmintrin.h>
+    #include <emmintrin.h> // SSE2 intrinsics
 #endif
 #if SIMD_USE_AVX
-    #include <immintrin.h>
+    #include <immintrin.h> // AVX intrinsics
 #endif
 #if SIMD_USE_NEON
-    #include <arm_neon.h>
+    #include <arm_neon.h> // NEON intrinsics
 #endif
 #if SIMD_USE_WASM_SIMD
-    #include <wasm_simd128.h>
+    #include <wasm_simd128.h> // WebAssembly SIMD intrinsics
 #endif
 
 //
 // Types
 //
 
-#include <stdint.h>
-#include <stdbool.h>
+#include <stdint.h> // Standard integer types
+#include <stdbool.h> // Standard boolean type
 
 typedef uint8_t u8;
 typedef uint16_t u16;
