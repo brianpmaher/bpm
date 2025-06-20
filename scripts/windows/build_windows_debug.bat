@@ -4,7 +4,7 @@ setlocal EnableDelayedExpansion
 
 cd /D "%~dp0"..\..\
 
-call scripts\windows\_log.bat
+call scripts\windows\_setup_logger.bat
 
 if not exist build\windows\debug (
     echo !log_info! Creating build directory... !log_end!
