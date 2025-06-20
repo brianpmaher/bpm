@@ -4,3 +4,6 @@ build/
 *.dll
 *.lib
 *.exe
+*.pdb
+*.exp
+*.ilk
