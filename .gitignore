@@ -1,1 +1,6 @@
+# Build artifacts
 build/
+*.obj
+*.dll
+*.lib
+*.exe
