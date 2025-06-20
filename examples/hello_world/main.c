@@ -1,5 +1,4 @@
-#include "base.h"
-#include "simd.h"
+#include <bpm/core.h>
 
 #include <stdio.h>
 
