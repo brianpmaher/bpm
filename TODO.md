@@ -38,11 +38,7 @@
 
 - [x] Base
 - [x] SIMD
-- Runtime
-  - [ ] Console
-  - [ ] Windowed
-  - [ ] Web
-  - [ ] Mobile
+- [ ] Runtime
 - [ ] Test
 - [ ] Memory
 - [ ] String
