@@ -38,6 +38,16 @@
 #endif
 
 //
+// MSVC configuration
+//
+
+#if COMPILER_MSVC
+    #if _MSVC_TRADITIONAL != 0
+        #error "Must use /std:c11 or /Zc:preprocessor for conformant preprocessor."
+    #endif
+#endif
+
+//
 // Standard version check
 //
 
@@ -51,6 +61,30 @@
     #endif
 #else
     #error "Unknown compiler"
+#endif
+
+//
+// Architecture detection
+//
+
+#if defined(_M_X64) || defined(__x86_64__) || defined(__amd64__)
+    #define ARCH_X64 1
+#elif defined(__aarch64__)
+    #define ARCH_ARM64 1
+#elif defined(__wasm32__)
+    #define ARCH_WASM32 1
+#else
+    #error "Unknown architecture"
+#endif
+
+#ifndef ARCH_X64
+    #define ARCH_X64 0
+#endif
+#ifndef ARCH_ARM64
+    #define ARCH_ARM64 0
+#endif
+#ifndef ARCH_WASM32
+    #define ARCH_WASM32 0
 #endif
 
 //
@@ -149,7 +183,7 @@
 #endif
 
 API void _assert_handler(const char* expression, const char* message, const char* file, int line);
-#define _get_assert_macro(_1, _2, NAME, ...) NAME
+#define _get_assert_macro(_arg1, _arg2, macro, ...) macro
 #define _assert1(expression) \
     do { \
         if (!(expression)) { \
@@ -175,74 +209,30 @@ API void _assert_handler(const char* expression, const char* message, const char
 #define SIMD_ENABLED 1
 
 #if SIMD_ENABLED
-    #if PLATFORM_WINDOWS || PLATFORM_LINUX || PLATFORM_MAC
-        #if COMPILER_MSVC
-            #if defined(_M_AMD64) || defined(_M_X64)
-                #define SIMD_USE_SSE 1
-                #define SIMD_USE_SSE2 1
-            #elif defined(_M_IX86) && defined(_M_IX86_FP) && _M_IX86_FP >= 2
-                #define SIMD_USE_SSE 1
-                #define SIMD_USE_SSE2 1
-            #elif defined(_M_IX86) && defined(_M_IX86_FP) && _M_IX86_FP >= 1
-                #define SIMD_USE_SSE 1
-            #endif
-        #elif COMPILER_GCC || COMPILER_CLANG
-            #ifdef __SSE2__
-                #define SIMD_USE_SSE 1
-                #define SIMD_USE_SSE2 1
-            #elif defined(__SSE__)
-                #define SIMD_USE_SSE 1
-            #endif
-            #ifdef __AVX__
-                #define SIMD_USE_AVX 1
-            #endif
-            #ifdef __AVX2__
-                #define SIMD_USE_AVX2 1
-            #endif
-        #endif
-    #endif
-    #if PLATFORM_IOS || PLATFORM_MAC || PLATFORM_ANDROID
-        #ifdef __ARM_NEON
-            #define SIMD_USE_NEON 1
-        #endif
-    #endif
-    #if PLATFORM_WEB && COMPILER_EMSCRIPTEN
-        #ifdef __wasm_simd128__
-            #define SIMD_USE_WASM_SIMD 1
-        #endif
+    #if ARCH_ARM64 && defined(__ARM_NEON)
+        #define SIMD_USE_NEON 1
+    #elif ARCH_X64
+        #define SIMD_USE_SSE2 1
+    #elif ARCH_WASM32 && defined(__wasm_simd128__)
+        #define SIMD_USE_WASM_SIMD 1
     #endif
 #endif
 
-#ifndef SIMD_USE_SSE
-    #define SIMD_USE_SSE 0
+#ifndef SIMD_USE_NEON
+    #define SIMD_USE_NEON 0
 #endif
 #ifndef SIMD_USE_SSE2
     #define SIMD_USE_SSE2 0
-#endif
-#ifndef SIMD_USE_AVX
-    #define SIMD_USE_AVX 0
-#endif
-#ifndef SIMD_USE_AVX2
-    #define SIMD_USE_AVX2 0
-#endif
-#ifndef SIMD_USE_NEON
-    #define SIMD_USE_NEON 0
 #endif
 #ifndef SIMD_USE_WASM_SIMD
     #define SIMD_USE_WASM_SIMD 0
 #endif
 
-#if SIMD_USE_SSE
-    #include <xmmintrin.h> // SSE intrinsics
+#if SIMD_USE_NEON
+#include <arm_neon.h> // NEON intrinsics
 #endif
 #if SIMD_USE_SSE2
     #include <emmintrin.h> // SSE2 intrinsics
-#endif
-#if SIMD_USE_AVX
-    #include <immintrin.h> // AVX intrinsics
-#endif
-#if SIMD_USE_NEON
-    #include <arm_neon.h> // NEON intrinsics
 #endif
 #if SIMD_USE_WASM_SIMD
     #include <wasm_simd128.h> // WebAssembly SIMD intrinsics

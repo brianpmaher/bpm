@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Assert Example",
+            "name": "Example: assert",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/examples/assert/assert.exe",
@@ -12,6 +12,18 @@
             "environment": [],
             "console": "integratedTerminal",
             "preLaunchTask": "build assert example",
+        },
+        {
+            "name": "Example: print_lib_info",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/print_lib_info/print_lib_info.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/examples/print_lib_info",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "build print_lib_info example",
         },
     ]
 }

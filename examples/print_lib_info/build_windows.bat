@@ -11,7 +11,7 @@ if !errorlevel! neq 0 (
     goto exit_error
 )
 
-pushd examples\assert
+pushd examples\print_lib_info
 
 echo !log_info! Copying bpm files... !log_end!
 del bpm.* >nul 2>&1
@@ -22,23 +22,23 @@ if !errorlevel! neq 0 (
     goto exit_error
 )
 
-echo !log_info! Building example: assert... !log_end!
-call cl main.c bpm.lib /I ..\..\include /Fe:assert.exe /std:c11 /nologo /Od /Zi
+echo !log_info! Building example: print_lib_info... !log_end!
+call cl main.c bpm.lib /I ..\..\include /Fe:print_lib_info.exe /std:c11 /nologo /Od /Zi
 if !errorlevel! neq 0 (
-    echo !log_error! Failed to build assert example. !log_end!
+    echo !log_error! Failed to build print_lib_info example. !log_end!
     popd
     goto exit_error
 )
-echo !log_success! assert example built successfully. !log_end!
+echo !log_success! print_lib_info example built successfully. !log_end!
 
 if "%1%" equ "run" (
-    echo !log_info! Running assert example... !log_end!
-    call assert.exe
+    echo !log_info! Running print_lib_info example... !log_end!
+    call print_lib_info.exe
     if !errorlevel! neq 0 (
-        echo !log_error! assert example failed. !log_end!
+        echo !log_error! print_lib_info example failed. !log_end!
         goto exit_error
     )
-    echo !log_success! assert example ran successfully. !log_end!
+    echo !log_success! print_lib_info example ran successfully. !log_end!
 )
 
 popd
