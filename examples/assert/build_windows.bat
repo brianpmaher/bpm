@@ -22,8 +22,6 @@ if !errorlevel! neq 0 (
 )
 
 echo !log_info! Building example: assert... !log_end!
-echo [TEMP] Current working directory: !cd!
-echo [TEMP] Listing contents of ..\..\build\windows\debug:
 dir ..\..\build\windows\debug
 call cl main.c bpm.lib /I ..\..\include /Fe:assert.exe /nologo /Od /Zi
 if !errorlevel! neq 0 (
