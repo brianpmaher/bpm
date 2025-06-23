@@ -274,3 +274,9 @@ typedef uint32_t b32;
 typedef uint64_t b64;
 
 typedef size_t usize;
+
+//
+// Library information
+//
+
+API void print_lib_info(void);

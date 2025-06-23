@@ -6,7 +6,7 @@
 
 setlocal EnableDelayedExpansion
 
-call "%~dp0_goto_project_root.bat"
+cd /D "%~dp0"..\..\
 
 call scripts\windows\_setup_logger.bat
 
